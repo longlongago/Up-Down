@@ -14,4 +14,8 @@
 @property(nonatomic, assign) BOOL mouseDown;
 @property(nonatomic, assign) CGFloat fontSize;
 @property(nonatomic, strong) NSColor* fontColor;
+@property(nonatomic, strong) NSString* upRate;
+@property(nonatomic, strong) NSString* downRate;
+
+-(void) setRateDataWithUp:(float)up down:(float)down;
 @end
