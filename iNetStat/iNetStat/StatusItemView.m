@@ -10,7 +10,7 @@
 #import "SystemThemeChangeHelper.h"
 
 const static float KB = 1024;
-const static float MB = KB*1024
+const static float MB = KB*1024;
 const static float GB = MB*1024;
 const static float TB = GB*1024;
 
@@ -58,6 +58,7 @@ const static float TB = GB*1024;
 {
     self.upRate = [self formatRateData:up];
     self.downRate = [self formatRateData:down];
+    [self setNeedsDisplay];
 }
 
 - (void) changeModel

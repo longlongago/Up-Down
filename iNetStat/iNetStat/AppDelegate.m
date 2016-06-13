@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "AutoLaunchHelper.h"
+#import "MonitorTask.h"
 
 @interface AppDelegate ()
 
@@ -28,6 +29,11 @@
     [self.menu addItem:[NSMenuItem separatorItem]];
     [self.menu addItemWithTitle:@"About" action:@selector(menuItemAboutClick) keyEquivalent:@""];
     [self.menu addItemWithTitle:@"Quit" action:@selector(menuItemQuitClick) keyEquivalent:@"q"];
+    
+    self.statusItemView = [[StatusItemView alloc]initWithStatusItem:self.statusItem menu:self.menu];
+    self.statusItem.view = self.statusItemView;
+    MonitorTask * task = [[MonitorTask alloc]initWithStatusItemView:self.statusItemView];
+    [task start];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {

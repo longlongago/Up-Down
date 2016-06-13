@@ -17,5 +17,6 @@
 @property(nonatomic, strong) NSString* upRate;
 @property(nonatomic, strong) NSString* downRate;
 
+- (id) initWithStatusItem:(NSStatusItem*) aStatusItme menu:(NSMenu*)aMenu;
 -(void) setRateDataWithUp:(float)up down:(float)down;
 @end
