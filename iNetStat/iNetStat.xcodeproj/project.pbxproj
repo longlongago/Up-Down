@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		812161211D16CFEB00287C1C /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 812161201D16CFEB00287C1C /* AppKit.framework */; };
+		812161261D16D3A900287C1C /* Panel.m in Sources */ = {isa = PBXBuildFile; fileRef = 812161251D16D3A900287C1C /* Panel.m */; };
+		8121612A1D16D47400287C1C /* PanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 812161291D16D47400287C1C /* PanelController.m */; };
 		CED0A9D01D085B83007B09B6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CED0A9CF1D085B83007B09B6 /* AppDelegate.m */; };
 		CED0A9D31D085B83007B09B6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CED0A9D21D085B83007B09B6 /* main.m */; };
 		CED0A9D51D085B83007B09B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED0A9D41D085B83007B09B6 /* Assets.xcassets */; };
@@ -18,6 +21,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		812161201D16CFEB00287C1C /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		812161241D16D3A900287C1C /* Panel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Panel.h; sourceTree = "<group>"; };
+		812161251D16D3A900287C1C /* Panel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Panel.m; sourceTree = "<group>"; };
+		812161281D16D47400287C1C /* PanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanelController.h; sourceTree = "<group>"; };
+		812161291D16D47400287C1C /* PanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PanelController.m; sourceTree = "<group>"; };
 		CED0A9CB1D085B83007B09B6 /* iNetStat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iNetStat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CED0A9CE1D085B83007B09B6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CED0A9CF1D085B83007B09B6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -40,16 +48,44 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				812161211D16CFEB00287C1C /* AppKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		812161221D16CFF500287C1C /* Framesworks */ = {
+			isa = PBXGroup;
+			children = (
+				812161201D16CFEB00287C1C /* AppKit.framework */,
+			);
+			name = Framesworks;
+			sourceTree = "<group>";
+		};
+		812161231D16D36800287C1C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				812161241D16D3A900287C1C /* Panel.h */,
+				812161251D16D3A900287C1C /* Panel.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		812161271D16D42F00287C1C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				812161281D16D47400287C1C /* PanelController.h */,
+				812161291D16D47400287C1C /* PanelController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		CED0A9C21D085B83007B09B6 = {
 			isa = PBXGroup;
 			children = (
 				CED0A9CD1D085B83007B09B6 /* iNetStat */,
+				812161221D16CFF500287C1C /* Framesworks */,
 				CED0A9CC1D085B83007B09B6 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -65,6 +101,8 @@
 		CED0A9CD1D085B83007B09B6 /* iNetStat */ = {
 			isa = PBXGroup;
 			children = (
+				812161271D16D42F00287C1C /* Controllers */,
+				812161231D16D36800287C1C /* Views */,
 				CED0A9CE1D085B83007B09B6 /* AppDelegate.h */,
 				CED0A9CF1D085B83007B09B6 /* AppDelegate.m */,
 				CED0A9DF1D085F0E007B09B6 /* AutoLaunchHelper.h */,
@@ -160,9 +198,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8121612A1D16D47400287C1C /* PanelController.m in Sources */,
 				CED0A9E71D087663007B09B6 /* SystemThemeChangeHelper.m in Sources */,
 				CED0A9EA1D0B2D2E007B09B6 /* MonitorTask.m in Sources */,
 				CED0A9D31D085B83007B09B6 /* main.m in Sources */,
+				812161261D16D3A900287C1C /* Panel.m in Sources */,
 				CED0A9E41D087288007B09B6 /* StatusItemView.m in Sources */,
 				CED0A9E11D085F0E007B09B6 /* AutoLaunchHelper.m in Sources */,
 				CED0A9D01D085B83007B09B6 /* AppDelegate.m in Sources */,
