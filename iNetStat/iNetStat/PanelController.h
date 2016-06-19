@@ -22,6 +22,8 @@
 @property (nonatomic, weak) id<PanelControllerDelegate> delegate;
 @property (nonatomic, strong) Panel* panel;
 
+
+-(id)initWithDelegate:(id<PanelControllerDelegate>)delegate;
 -(void)openPanelWithStatusView:(NSView*)statusView;
 -(void)closePanel;
 

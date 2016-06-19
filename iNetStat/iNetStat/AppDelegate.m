@@ -10,7 +10,7 @@
 #import "AutoLaunchHelper.h"
 #import "MonitorTask.h"
 
-@interface AppDelegate ()
+@interface AppDelegate ()<PanelControllerDelegate>
 
 @property (weak) IBOutlet NSWindow *window;
 @end
@@ -20,18 +20,20 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
     self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:72];
-    self.menu = [[NSMenu alloc ]init];
-    self.autoLaunchMenu = [[NSMenuItem alloc]init];
-    [self.autoLaunchMenu setTitle:@"Launch when login"];
-    [self.autoLaunchMenu setState:[AutoLaunchHelper isLaunchWhenLogin]?1:0];
-    [self.autoLaunchMenu setAction:@selector(menuItemAutoLaunchClick)];
-    [self.menu addItem:self.autoLaunchMenu];
-    [self.menu addItem:[NSMenuItem separatorItem]];
-    [self.menu addItemWithTitle:@"About" action:@selector(menuItemAboutClick) keyEquivalent:@""];
-    [self.menu addItemWithTitle:@"Quit" action:@selector(menuItemQuitClick) keyEquivalent:@"q"];
+    self.panelController = [[PanelController alloc]initWithDelegate:self];
+//    self.menu = [[NSMenu alloc ]init];
+//    self.autoLaunchMenu = [[NSMenuItem alloc]init];
+//    [self.autoLaunchMenu setTitle:@"Launch when login"];
+//    [self.autoLaunchMenu setState:[AutoLaunchHelper isLaunchWhenLogin]?1:0];
+//    [self.autoLaunchMenu setAction:@selector(menuItemAutoLaunchClick)];
+//    [self.menu addItem:self.autoLaunchMenu];
+//    [self.menu addItem:[NSMenuItem separatorItem]];
+//    [self.menu addItemWithTitle:@"About" action:@selector(menuItemAboutClick) keyEquivalent:@""];
+//    [self.menu addItemWithTitle:@"Quit" action:@selector(menuItemQuitClick) keyEquivalent:@"q"];
     
     self.statusItemView = [[StatusItemView alloc]initWithStatusItem:self.statusItem menu:self.menu];
     self.statusItem.view = self.statusItemView;
+    self.statusItemView.action = @selector(click);
     MonitorTask * task = [[MonitorTask alloc]initWithStatusItemView:self.statusItemView];
     [task start];
 }
@@ -69,5 +71,10 @@
 -(void) menuItemAutoLaunchClick
 {
     [NSApp terminate:nil];
+}
+
+-(void)click
+{
+    [self.panelController openPanelWithStatusView:self.statusItemView];
 }
 @end

@@ -106,4 +106,9 @@ const static float TB = GB*1024;
     [self setNeedsDisplay];
 }
 
+- (void)mouseDown:(NSEvent *)theEvent
+{
+    [NSApp sendAction:self.action to:self.target from:self];
+}
+
 @end

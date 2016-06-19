@@ -17,7 +17,7 @@
         [self setAcceptsMouseMovedEvents:YES];
         [self setLevel:NSPopUpMenuWindowLevel];
         [self setOpaque:NO];
-        [self setBackgroundColor:[NSColor clearColor]];
+        [self setBackgroundColor:[NSColor redColor]];
         
         self.text = [[NSTextField alloc]initWithFrame:NSMakeRect(0, 0, 200, 100)];
         self.text.placeholderString = @"something";
@@ -25,12 +25,12 @@
     return self;
 }
 
--(void)setDelegate:(id<NSWindowDelegate>)delegate
+-(void)setWindowDelegate:(id<NSWindowDelegate>)delegate
 {
     self.delegate = delegate;
 }
 
-- (BOOL) canBecomeKeyWindow
+- (BOOL) canBecomeKeyWindow;
 {
     return YES;
 }

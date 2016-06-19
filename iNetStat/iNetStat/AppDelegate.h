@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "StatusItemView.h"
+#import "PanelController.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
@@ -15,6 +16,7 @@
 @property(nonatomic, strong) NSMenu* menu;
 @property(nonatomic, strong) NSMenuItem* autoLaunchMenu;
 @property(nonatomic, strong) StatusItemView* statusItemView;
+@property(nonatomic, strong) PanelController * panelController;
 
 -(void) menuItemAboutClick;
 -(void) menuItemQuitClick;

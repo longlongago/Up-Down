@@ -13,5 +13,5 @@
 @property (nonatomic, strong) NSTextField* text;
 
 -(id)init;
--(void)setDelegate:(id<NSWindowDelegate>)delegate;
+-(void)setWindowDelegate:(id<NSWindowDelegate>)delegate;
 @end

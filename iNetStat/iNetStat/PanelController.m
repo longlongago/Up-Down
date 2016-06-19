@@ -29,7 +29,7 @@
     if (self) {
         self.delegate = delegate;
         self.panel = panel;
-        [self.panel setDelegate:self];
+        [self.panel setWindowDelegate:self];
     }
     return self;
 }
@@ -63,7 +63,7 @@
     if (NSMaxX(panelRect) > (NSMaxX(screenRect) - ARROW_HEIGHT)) {
         panelRect.origin.x -= NSMaxX(panelRect) - (NSMaxX(screenRect) - ARROW_HEIGHT);
     }
-    [NSApp activateIgnoringOtherApps:NO];
+    [NSApp activateIgnoringOtherApps:YES];
     [self.panel setAlphaValue:0];
     [self.panel setFrame:panelRect display:YES];
     [self.panel makeKeyAndOrderFront:nil];
@@ -91,12 +91,21 @@
 #pragma mark - NSWindowDelegate
 - (void)windowWillClose:(NSNotification *)notification
 {
-    
+    [self closePanel];
 }
 
 - (void)windowDidResignKey:(NSNotification *)notification
 {
-    
+    if ([self.panel isVisible]) {
+        [self closePanel];
+    }
+}
+
+#pragma mark - Keyboard
+
+- (void)cancelOperation:(id)sender
+{
+    [self closePanel];
 }
 
 @end
