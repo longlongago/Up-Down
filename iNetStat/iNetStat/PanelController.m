@@ -16,7 +16,7 @@
 #define OPEN_DURATION .15
 #define CLOSE_DURATION .1
 
-@interface PanelController ()<NSWindowDelegate>
+@interface PanelController ()<NSWindowDelegate, NSTableViewDataSource, NSTableViewDelegate>
 
 @end
 
@@ -24,7 +24,7 @@
 
 -(id)initWithDelegate:(id<PanelControllerDelegate>)delegate
 {
-    Panel* panel = [[Panel alloc]init];
+    Panel* panel = [[Panel alloc]init:self tabDelegate:self];
     self = [super initWithWindow:panel];
     if (self) {
         self.delegate = delegate;
@@ -86,6 +86,17 @@
     dispatch_after(dispatch_walltime(NULL, NSEC_PER_SEC*CLOSE_DURATION*2), dispatch_get_main_queue(), ^{
         [self.window orderOut:nil];
     });
+}
+
+#pragma mark - NSTableViewDataSource
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
+{
+    return 10;
+}
+
+- (nullable id)tableView:(NSTableView *)tableView objectValueForTableColumn:(nullable NSTableColumn *)tableColumn row:(NSInteger)row
+{
+    return [[NSCell alloc]initTextCell:@"firstCellValue"];
 }
 
 #pragma mark - NSWindowDelegate

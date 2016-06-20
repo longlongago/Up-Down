@@ -11,7 +11,8 @@
 @interface Panel : NSPanel
 
 @property (nonatomic, strong) NSTextField* text;
+@property (nonatomic, strong) NSTableView* tableView;
 
--(id)init;
+-(id)init:(id<NSTableViewDataSource>)dataSource tabDelegate:(id<NSTableViewDelegate>)tabDelegate;
 -(void)setWindowDelegate:(id<NSWindowDelegate>)delegate;
 @end
