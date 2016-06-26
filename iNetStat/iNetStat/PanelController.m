@@ -9,7 +9,7 @@
 #import "PanelController.h"
 
 
-#define POPUP_HEIGHT 122
+#define POPUP_HEIGHT 722
 #define PANEL_WIDTH 280
 #define ARROW_WIDTH 12
 #define ARROW_HEIGHT 8
@@ -77,6 +77,7 @@
     [self.panel setAlphaValue:0];
     [self.panel setFrame:panelRect display:YES];
     [self.panel makeKeyAndOrderFront:nil];
+    [self.panel updateData];
     
     NSTimeInterval openDuration = OPEN_DURATION;
     
@@ -116,6 +117,7 @@
                 NSString* strIP = [[NSString alloc]initWithData:data encoding:NSASCIIStringEncoding];
                 NSLog(@"out wan ip:%@", strIP);
                 self.wanIP = strIP;
+                [self.panel updateData];
                 [self updateIPInfo:self.wanIP];
             }
             else
@@ -145,6 +147,7 @@
             if (httpResp.statusCode == 200) {
                 id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
                 self.ipInfo = [json copy];
+                [self.panel updateData];
                 NSLog(@"ip country_code:%@", [self.ipInfo objectForKey:@"country_code"]);
             }
             else
@@ -154,32 +157,55 @@
         }
     }];
     [task resume];
-    
-    
-    
-//    // These code snippets use an open-source library. http://unirest.io/objective-c
-//    NSDictionary *headers = @{@"X-Mashape-Key": @"ExLCG9onM2mshwKdAs0HaCUmIA8Ep1im0QLjsnVgDMn1w2xeXA", @"Accept": @"application/json"};
-//    UNIUrlConnection *asyncConnection = [[UNIRest get:^(UNISimpleRequest *request) {
-//        [request setUrl:@"https://ipanda-ip2geo-v1.p.mashape.com/json/8.8.8.8"];
-//        [request setHeaders:headers];
-//    }] asJsonAsync:^(UNIHTTPJsonResponse *response, NSError *error) {
-//        NSInteger code = response.code;
-//        NSDictionary *responseHeaders = response.headers;
-//        UNIJsonNode *body = response.body;
-//        NSData *rawBody = response.rawBody;
-//    }];
 }
 
 
 #pragma mark - NSTableViewDataSource
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-    return 10;
+    NSInteger count = 0;
+    if (self.wanIP.length > 0) {
+        count++;
+    }
+    count += self.ipInfo.count;
+    return count;
 }
 
 - (nullable id)tableView:(NSTableView *)tableView objectValueForTableColumn:(nullable NSTableColumn *)tableColumn row:(NSInteger)row
 {
-    return [[NSCell alloc]initTextCell:@"firstCellValue"];
+    NSCell* cell = (NSCell*)[tableView makeViewWithIdentifier:@"id" owner:nil];
+    if (!cell) {
+        cell = [[NSCell alloc]initTextCell:@"aaa"];
+    }
+    switch (row) {
+        case 0:
+            cell.title = self.wanIP;
+            break;
+        case 1:
+            cell.title = [self.ipInfo objectForKey:@"country_code"];
+            
+        default:
+            break;
+    }
+    cell.stringValue = cell.title;
+    return cell;
+}
+
+- (void)tableView:(NSTableView *)tableView willDisplayCell:(id)cell forTableColumn:(nullable NSTableColumn *)tableColumn row:(NSInteger)row
+{
+    NSTextFieldCell* c = (NSTextFieldCell*)cell;
+    [c setTitle:@"bbb"];
+    
+    switch (row) {
+        case 0:
+            c.title = self.wanIP;
+            break;
+        case 1:
+            c.title = [self.ipInfo objectForKey:@"country_code"];
+            
+        default:
+            break;
+    }
 }
 
 #pragma mark - NSWindowDelegate

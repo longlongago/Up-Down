@@ -12,7 +12,7 @@
 
 -(id)init:(id<NSTableViewDataSource>)dataSource tabDelegate:(id<NSTableViewDelegate>)tabDelegate
 {
-    self = [super initWithContentRect:NSMakeRect(0, 0, 280, 180) styleMask:NSUtilityWindowMask backing:NSBackingStoreBuffered defer:YES];
+    self = [super initWithContentRect:NSMakeRect(0, 0, 280, 780) styleMask:NSUtilityWindowMask backing:NSBackingStoreBuffered defer:YES];
     if (self) {
         [self setAcceptsMouseMovedEvents:YES];
         [self setLevel:NSPopUpMenuWindowLevel];
@@ -23,6 +23,8 @@
 //        self.text.placeholderString = @"something";
 //        [self.contentView addSubview:self.text];
         self.tableView = [[NSTableView alloc]initWithFrame:NSZeroRect];
+        NSTableColumn *column = [[NSTableColumn alloc] initWithIdentifier:@"id"];
+        [self.tableView addTableColumn:column];
         //self.tableView.contentm
         [self.contentView addSubview:self.tableView];
         self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -64,6 +66,11 @@
 -(void)setWindowDelegate:(id<NSWindowDelegate>)delegate
 {
     self.delegate = delegate;
+}
+
+-(void)updateData
+{
+    [self.tableView reloadData];
 }
 
 - (BOOL) canBecomeKeyWindow;

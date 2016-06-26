@@ -15,4 +15,5 @@
 
 -(id)init:(id<NSTableViewDataSource>)dataSource tabDelegate:(id<NSTableViewDelegate>)tabDelegate;
 -(void)setWindowDelegate:(id<NSWindowDelegate>)delegate;
+-(void)updateData;
 @end
