@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "AutoLaunchHelper.h"
 #import "MonitorTask.h"
+#import "libtop.h"
 
 @interface AppDelegate ()<PanelControllerDelegate>
 
@@ -36,6 +37,8 @@
     self.statusItemView.action = @selector(click);
     MonitorTask * task = [[MonitorTask alloc]initWithStatusItemView:self.statusItemView];
     [task start];
+    libtop_init(NULL, NULL);
+    libtop_sample(FALSE, FALSE);
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {

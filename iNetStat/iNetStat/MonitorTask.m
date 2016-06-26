@@ -7,6 +7,7 @@
 //
 
 #import "MonitorTask.h"
+#import "libtop.h"
 
 @implementation MonitorTask
 
@@ -31,6 +32,19 @@
 
 -(void) updateRateData
 {
+    libtop_sample(FALSE, FALSE);
+    const libtop_tsamp_t * tssamp = libtop_tsamp();
+    fprintf(stderr, "inbyte:%lld, outbyte:%lld.\n", tssamp->net_ibytes, tssamp->net_obytes);
+    if (tssamp->time.tv_usec > tssamp->p_time.tv_usec) {
+        float deltaTime = (tssamp->time.tv_sec-tssamp->p_time.tv_sec)+(tssamp->time.tv_usec-tssamp->p_time.tv_usec)/1000000.0;
+        uint64_t deltaUp = tssamp->net_obytes - tssamp->p_net_obytes;
+        uint64_t deltaDown = tssamp->net_ibytes - tssamp->p_net_ibytes;
+        float upRate=0.0f, downRate=0.0f;
+        upRate = deltaUp/deltaTime;
+        downRate = deltaDown/deltaTime;
+        [self.statusItemView setRateDataWithUp:upRate down:downRate];
+    }
+#if 0
     NSTask* task = [[NSTask alloc]init];
     task.launchPath = @"/usr/bin/sar";
     task.arguments = @[@"-n", @"DEV", @"1"];
@@ -55,6 +69,7 @@
     {
         NSLog(@"task failed");
     }
+#endif
 }
 
 /*
