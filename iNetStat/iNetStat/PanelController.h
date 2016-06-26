@@ -21,6 +21,8 @@
 
 @property (nonatomic, weak) id<PanelControllerDelegate> delegate;
 @property (nonatomic, strong) Panel* panel;
+@property (nonatomic, strong) NSString* wanIP;
+@property (nonatomic, strong) NSDictionary* ipInfo;
 
 
 -(id)initWithDelegate:(id<PanelControllerDelegate>)delegate;

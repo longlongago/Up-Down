@@ -23,6 +23,7 @@
 //        self.text.placeholderString = @"something";
 //        [self.contentView addSubview:self.text];
         self.tableView = [[NSTableView alloc]initWithFrame:NSZeroRect];
+        //self.tableView.contentm
         [self.contentView addSubview:self.tableView];
         self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:self.tableView

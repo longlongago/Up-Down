@@ -16,7 +16,10 @@
 #define OPEN_DURATION .15
 #define CLOSE_DURATION .1
 
+
 @interface PanelController ()<NSWindowDelegate, NSTableViewDataSource, NSTableViewDelegate>
+@property (nonatomic, assign)int index;
+@property (nonatomic, strong)NSArray* echoSites;
 
 @end
 
@@ -27,9 +30,12 @@
     Panel* panel = [[Panel alloc]init:self tabDelegate:self];
     self = [super initWithWindow:panel];
     if (self) {
+        self.echoSites = @[@"https://api.ipify.org", @"https://icanhazip.com/", @"https://www.trackip.net/ip"];
+        self.index = 2;
         self.delegate = delegate;
         self.panel = panel;
         [self.panel setWindowDelegate:self];
+        [self updateWanIP];
     }
     return self;
 }
@@ -40,6 +46,10 @@
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 }
 
+- (void)showWindow:(nullable id)sender
+{
+    [super showWindow:sender];
+}
 
 -(void)openPanelWithStatusView:(NSView*)statusView
 {
@@ -87,6 +97,79 @@
         [self.window orderOut:nil];
     });
 }
+
+-(void) updateWanIP
+{
+    if (self.index >= self.echoSites.count) {
+        NSLog(@"no more echo site!");
+        return;
+    }
+    NSString* site = (NSString*)[self.echoSites objectAtIndex:self.index];
+    self.index++;
+    NSURL* url = [NSURL URLWithString:site];
+    NSURLRequest* request = [NSURLRequest requestWithURL:url];
+    NSURLSession* session = [NSURLSession sharedSession];
+    NSURLSessionDataTask* task = [session dataTaskWithRequest:request completionHandler:^(NSData* data, NSURLResponse* response, NSError* error){
+        if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+            NSHTTPURLResponse* httpResp = (NSHTTPURLResponse*)response;
+            if (httpResp.statusCode == 200) {
+                NSString* strIP = [[NSString alloc]initWithData:data encoding:NSASCIIStringEncoding];
+                NSLog(@"out wan ip:%@", strIP);
+                self.wanIP = strIP;
+                [self updateIPInfo:self.wanIP];
+            }
+            else
+            {
+                [self updateWanIP];
+            }
+        }
+    }];
+    [task resume];
+}
+
+-(void) updateIPInfo:(NSString*)ip
+{
+    if (ip.length == 0) {
+        NSLog(@"wrong ip");
+        return;
+    }
+    NSString* site = [NSString stringWithFormat:@"https://ipanda-ip2geo-v1.p.mashape.com/json/%@", ip];
+    NSURL* url = [NSURL URLWithString:site];
+    NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL: url];
+    [request setValue:@"ExLCG9onM2mshwKdAs0HaCUmIA8Ep1im0QLjsnVgDMn1w2xeXA" forHTTPHeaderField:@"X-Mashape-Key"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    NSURLSession* session = [NSURLSession sharedSession];
+    NSURLSessionDataTask* task = [session dataTaskWithRequest:request completionHandler:^(NSData* data, NSURLResponse* response, NSError* error){
+        if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+            NSHTTPURLResponse* httpResp = (NSHTTPURLResponse*)response;
+            if (httpResp.statusCode == 200) {
+                id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                self.ipInfo = [json copy];
+                NSLog(@"ip country_code:%@", [self.ipInfo objectForKey:@"country_code"]);
+            }
+            else
+            {
+                NSLog(@"request ip info error");
+            }
+        }
+    }];
+    [task resume];
+    
+    
+    
+//    // These code snippets use an open-source library. http://unirest.io/objective-c
+//    NSDictionary *headers = @{@"X-Mashape-Key": @"ExLCG9onM2mshwKdAs0HaCUmIA8Ep1im0QLjsnVgDMn1w2xeXA", @"Accept": @"application/json"};
+//    UNIUrlConnection *asyncConnection = [[UNIRest get:^(UNISimpleRequest *request) {
+//        [request setUrl:@"https://ipanda-ip2geo-v1.p.mashape.com/json/8.8.8.8"];
+//        [request setHeaders:headers];
+//    }] asJsonAsync:^(UNIHTTPJsonResponse *response, NSError *error) {
+//        NSInteger code = response.code;
+//        NSDictionary *responseHeaders = response.headers;
+//        UNIJsonNode *body = response.body;
+//        NSData *rawBody = response.rawBody;
+//    }];
+}
+
 
 #pragma mark - NSTableViewDataSource
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
