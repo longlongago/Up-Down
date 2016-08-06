@@ -17,7 +17,7 @@
 #define CLOSE_DURATION .1
 
 
-@interface PanelController ()<NSWindowDelegate, NSTableViewDataSource, NSTableViewDelegate>
+@interface PanelController ()<NSWindowDelegate, PanelDataSource>
 @property (nonatomic, assign)int index;
 @property (nonatomic, strong)NSArray* echoSites;
 
@@ -27,7 +27,7 @@
 
 -(id)initWithDelegate:(id<PanelControllerDelegate>)delegate
 {
-    Panel* panel = [[Panel alloc]init:self tabDelegate:self];
+    Panel* panel = [[Panel alloc]init:self];
     self = [super initWithWindow:panel];
     if (self) {
         self.echoSites = @[@"https://api.ipify.org", @"https://icanhazip.com/", @"https://www.trackip.net/ip"];
@@ -170,43 +170,43 @@
     count += self.ipInfo.count;
     return count;
 }
-
-- (nullable id)tableView:(NSTableView *)tableView objectValueForTableColumn:(nullable NSTableColumn *)tableColumn row:(NSInteger)row
-{
-    NSCell* cell = (NSCell*)[tableView makeViewWithIdentifier:@"id" owner:nil];
-    if (!cell) {
-        cell = [[NSCell alloc]initTextCell:@"aaa"];
-    }
-    switch (row) {
-        case 0:
-            cell.title = self.wanIP;
-            break;
-        case 1:
-            cell.title = [self.ipInfo objectForKey:@"country_code"];
-            
-        default:
-            break;
-    }
-    cell.stringValue = cell.title;
-    return cell;
-}
-
-- (void)tableView:(NSTableView *)tableView willDisplayCell:(id)cell forTableColumn:(nullable NSTableColumn *)tableColumn row:(NSInteger)row
-{
-    NSTextFieldCell* c = (NSTextFieldCell*)cell;
-    [c setTitle:@"bbb"];
-    
-    switch (row) {
-        case 0:
-            c.title = self.wanIP;
-            break;
-        case 1:
-            c.title = [self.ipInfo objectForKey:@"country_code"];
-            
-        default:
-            break;
-    }
-}
+//
+//- (nullable id)tableView:(NSTableView *)tableView objectValueForTableColumn:(nullable NSTableColumn *)tableColumn row:(NSInteger)row
+//{
+//    NSCell* cell = (NSCell*)[tableView makeViewWithIdentifier:@"id" owner:nil];
+//    if (!cell) {
+//        cell = [[NSCell alloc]initTextCell:@"aaa"];
+//    }
+//    switch (row) {
+//        case 0:
+//            cell.title = self.wanIP;
+//            break;
+//        case 1:
+//            cell.title = [self.ipInfo objectForKey:@"country_code"];
+//            
+//        default:
+//            break;
+//    }
+//    cell.stringValue = cell.title;
+//    return cell;
+//}
+//
+//- (void)tableView:(NSTableView *)tableView willDisplayCell:(id)cell forTableColumn:(nullable NSTableColumn *)tableColumn row:(NSInteger)row
+//{
+//    NSTextFieldCell* c = (NSTextFieldCell*)cell;
+//    [c setTitle:@"bbb"];
+//    
+//    switch (row) {
+//        case 0:
+//            c.title = self.wanIP;
+//            break;
+//        case 1:
+//            c.title = [self.ipInfo objectForKey:@"country_code"];
+//            
+//        default:
+//            break;
+//    }
+//}
 
 #pragma mark - NSWindowDelegate
 - (void)windowWillClose:(NSNotification *)notification
@@ -228,4 +228,25 @@
     [self closePanel];
 }
 
+
+#pragma mark - PanelDataSource
+-(NSString*) getWanIP
+{
+    return self.wanIP;
+}
+
+-(NSDictionary*) getIPInfo
+{
+    return [NSDictionary dictionaryWithDictionary:self.ipInfo];
+}
+
+-(NSString*) dumpInfo
+{
+    NSString* info = [NSString stringWithFormat:@"IP:%@", self.wanIP];
+    NSDictionary* dic = [self getIPInfo];
+    for (NSString* key in dic.allKeys) {
+        info = [info stringByAppendingFormat:@";%@:%@", key, [dic objectForKey:key] ];
+    }
+    return info;
+}
 @end

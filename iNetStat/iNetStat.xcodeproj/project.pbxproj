@@ -10,6 +10,7 @@
 		812161211D16CFEB00287C1C /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 812161201D16CFEB00287C1C /* AppKit.framework */; };
 		812161261D16D3A900287C1C /* Panel.m in Sources */ = {isa = PBXBuildFile; fileRef = 812161251D16D3A900287C1C /* Panel.m */; };
 		8121612A1D16D47400287C1C /* PanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 812161291D16D47400287C1C /* PanelController.m */; };
+		CEAA333F1D56218100D46010 /* NSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAA333E1D56218100D46010 /* NSLabel.m */; };
 		CED0A9D01D085B83007B09B6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CED0A9CF1D085B83007B09B6 /* AppDelegate.m */; };
 		CED0A9D31D085B83007B09B6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CED0A9D21D085B83007B09B6 /* main.m */; };
 		CED0A9D51D085B83007B09B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED0A9D41D085B83007B09B6 /* Assets.xcassets */; };
@@ -27,6 +28,8 @@
 		812161251D16D3A900287C1C /* Panel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Panel.m; sourceTree = "<group>"; };
 		812161281D16D47400287C1C /* PanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanelController.h; sourceTree = "<group>"; };
 		812161291D16D47400287C1C /* PanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PanelController.m; sourceTree = "<group>"; };
+		CEAA333D1D56218100D46010 /* NSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSLabel.h; sourceTree = "<group>"; };
+		CEAA333E1D56218100D46010 /* NSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSLabel.m; sourceTree = "<group>"; };
 		CED0A9CB1D085B83007B09B6 /* iNetStat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iNetStat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CED0A9CE1D085B83007B09B6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CED0A9CF1D085B83007B09B6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -73,6 +76,8 @@
 			children = (
 				812161241D16D3A900287C1C /* Panel.h */,
 				812161251D16D3A900287C1C /* Panel.m */,
+				CEAA333D1D56218100D46010 /* NSLabel.h */,
+				CEAA333E1D56218100D46010 /* NSLabel.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -215,6 +220,7 @@
 				8121612A1D16D47400287C1C /* PanelController.m in Sources */,
 				CED0A9EC1D1E654A007B09B6 /* libtop.c in Sources */,
 				CED0A9E71D087663007B09B6 /* SystemThemeChangeHelper.m in Sources */,
+				CEAA333F1D56218100D46010 /* NSLabel.m in Sources */,
 				CED0A9EA1D0B2D2E007B09B6 /* MonitorTask.m in Sources */,
 				CED0A9D31D085B83007B09B6 /* main.m in Sources */,
 				812161261D16D3A900287C1C /* Panel.m in Sources */,

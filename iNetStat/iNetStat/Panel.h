@@ -8,12 +8,21 @@
 
 #import <Cocoa/Cocoa.h>
 
+@protocol PanelDataSource <NSObject>
+
+-(NSString*) getWanIP;
+-(NSDictionary*) getIPInfo;
+
+-(NSString*) dumpInfo;
+
+@end
+
 @interface Panel : NSPanel
 
-@property (nonatomic, strong) NSTextField* text;
-@property (nonatomic, strong) NSTableView* tableView;
+//@property (nonatomic, strong) NSTableView* tableView;
+@property (nonatomic, weak)id<PanelDataSource> dataSource;
 
--(id)init:(id<NSTableViewDataSource>)dataSource tabDelegate:(id<NSTableViewDelegate>)tabDelegate;
+-(id)init:(id<PanelDataSource>)dataSource;
 -(void)setWindowDelegate:(id<NSWindowDelegate>)delegate;
 -(void)updateData;
 @end
