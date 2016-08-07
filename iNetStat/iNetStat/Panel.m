@@ -26,6 +26,8 @@
     NSLabel* _country_code;
     NSLabel* _region_code;
     NSLabel* _region_name;
+    
+    NSImageView* _country_flag;
 }
 
 -(id)init:(id<PanelDataSource>)dataSource
@@ -35,7 +37,7 @@
         [self setAcceptsMouseMovedEvents:YES];
         [self setLevel:NSPopUpMenuWindowLevel];
         [self setOpaque:NO];
-        [self setBackgroundColor:[NSColor redColor]];
+        //[self setBackgroundColor:[NSColor redColor]];
         
         self.dataSource = dataSource;
         
@@ -55,8 +57,10 @@
         [self.contentView addSubview:self->_zip_code];
         self->_country_code = [[NSLabel alloc]initWithFrame:NSMakeRect(0, 220, 280, 120)];
         [self.contentView addSubview:self->_country_code];
-        self->_country_name = [[NSLabel alloc]initWithFrame:NSMakeRect(0, 240, 280, 120)];
+        self->_country_name = [[NSLabel alloc]initWithFrame:NSMakeRect(0, 240, 100, 120)];
         [self.contentView addSubview:self->_country_name];
+        self->_country_flag = [[NSImageView alloc]initWithFrame:NSMakeRect(100, 240, 100, 100)];
+        [self.contentView addSubview:self->_country_flag];
         self->_region_code = [[NSLabel alloc]initWithFrame:NSMakeRect(0, 260, 280, 120)];
         [self.contentView addSubview:self->_region_code];
         self->_region_name = [[NSLabel alloc]initWithFrame:NSMakeRect(0, 280, 280, 120)];
@@ -83,6 +87,14 @@
     self->_country_name.stringValue = [NSString stringWithFormat:@"%@", [dictInfo objectForKey:@"country_name"]];
     self->_region_code.stringValue  = [NSString stringWithFormat:@"%@", [dictInfo objectForKey:@"region_code"]];
     self->_region_name.stringValue  = [NSString stringWithFormat:@"%@", [dictInfo objectForKey:@"region_name"]];
+    
+    NSString* strPath = [NSString stringWithFormat:@"country_flag/%@", self->_country_code.stringValue.uppercaseString];
+    NSString* filePath = [[NSBundle mainBundle] pathForResource:strPath ofType:@"png"];
+    NSImage* img = [[NSImage alloc]initWithContentsOfFile:filePath];
+    //img.size = CGSizeMake(24, 24);
+    //img.backgroundColor = [NSColor redColor];
+    //self->_country_flag = [NSImageView alloc]initWithImage
+    self->_country_flag.image = img;// [NSImage imageNamed:filePath];
     CLLocationDegrees lati = [[NSString stringWithFormat:@"%@", [dictInfo objectForKey:@"latitude"]] doubleValue];
     CLLocationDegrees longti = [[NSString stringWithFormat:@"%@", [dictInfo objectForKey:@"longitude"]] doubleValue];
     [self updateMapWithLati:lati andLongti:longti];

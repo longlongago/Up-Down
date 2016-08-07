@@ -10,6 +10,7 @@
 		812161211D16CFEB00287C1C /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 812161201D16CFEB00287C1C /* AppKit.framework */; };
 		812161261D16D3A900287C1C /* Panel.m in Sources */ = {isa = PBXBuildFile; fileRef = 812161251D16D3A900287C1C /* Panel.m */; };
 		8121612A1D16D47400287C1C /* PanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 812161291D16D47400287C1C /* PanelController.m */; };
+		CE7D168B1D574361008F4440 /* country_flag in Resources */ = {isa = PBXBuildFile; fileRef = CE7D168A1D574361008F4440 /* country_flag */; };
 		CEAA333F1D56218100D46010 /* NSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAA333E1D56218100D46010 /* NSLabel.m */; };
 		CED0A9D01D085B83007B09B6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CED0A9CF1D085B83007B09B6 /* AppDelegate.m */; };
 		CED0A9D31D085B83007B09B6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CED0A9D21D085B83007B09B6 /* main.m */; };
@@ -28,6 +29,7 @@
 		812161251D16D3A900287C1C /* Panel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Panel.m; sourceTree = "<group>"; };
 		812161281D16D47400287C1C /* PanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanelController.h; sourceTree = "<group>"; };
 		812161291D16D47400287C1C /* PanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PanelController.m; sourceTree = "<group>"; };
+		CE7D168A1D574361008F4440 /* country_flag */ = {isa = PBXFileReference; lastKnownFileType = folder; path = country_flag; sourceTree = "<group>"; };
 		CEAA333D1D56218100D46010 /* NSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSLabel.h; sourceTree = "<group>"; };
 		CEAA333E1D56218100D46010 /* NSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSLabel.m; sourceTree = "<group>"; };
 		CED0A9CB1D085B83007B09B6 /* iNetStat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iNetStat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,6 +113,7 @@
 		CED0A9CD1D085B83007B09B6 /* iNetStat */ = {
 			isa = PBXGroup;
 			children = (
+				CE7D168A1D574361008F4440 /* country_flag */,
 				CED0A9F11D1F0186007B09B6 /* iNetStat.entitlements */,
 				812161271D16D42F00287C1C /* Controllers */,
 				812161231D16D36800287C1C /* Views */,
@@ -206,6 +209,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CED0A9D51D085B83007B09B6 /* Assets.xcassets in Resources */,
+				CE7D168B1D574361008F4440 /* country_flag in Resources */,
 				CED0A9D81D085B83007B09B6 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
