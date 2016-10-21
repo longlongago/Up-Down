@@ -9,6 +9,7 @@
 #import "Panel.h"
 #import "NSLabel.h"
 #import <MapKit/MapKit.h>
+#import "Define.h"
 
 @interface Panel()
 
@@ -41,32 +42,66 @@
         
         self.dataSource = dataSource;
         
-        self.textIP = [[NSLabel alloc]initWithFrame:NSMakeRect(0, 100, 200, 40)];
-        [self.contentView addSubview:self.textIP];
+        [self createComponents];
         
-        self->_mapView = [[MKMapView alloc]initWithFrame:NSMakeRect(0, 400, 280, 300)];
-        self->_mapView.rotateEnabled = NO;
-        [self.contentView addSubview:self->_mapView];
+        NSLabel* title = [NSLabel new];
+        title.font = [NSFont fontWithName: FONT_NAME size: 15.0 ];
+        [self.contentView addSubview: title];
         
-        
-        self->_timeZone = [[NSLabel alloc]initWithFrame:NSMakeRect(0, 160, 280, 120)];
-        [self.contentView addSubview:self->_timeZone];
-        self->_city = [[NSLabel alloc]initWithFrame:NSMakeRect(0, 180, 280, 120)];
-        [self.contentView addSubview:self->_city];
-        self->_zip_code = [[NSLabel alloc]initWithFrame:NSMakeRect(0, 200, 280, 120)];
-        [self.contentView addSubview:self->_zip_code];
-        self->_country_code = [[NSLabel alloc]initWithFrame:NSMakeRect(0, 220, 280, 120)];
-        [self.contentView addSubview:self->_country_code];
-        self->_country_name = [[NSLabel alloc]initWithFrame:NSMakeRect(0, 240, 100, 120)];
-        [self.contentView addSubview:self->_country_name];
-        self->_country_flag = [[NSImageView alloc]initWithFrame:NSMakeRect(100, 240, 100, 100)];
-        [self.contentView addSubview:self->_country_flag];
-        self->_region_code = [[NSLabel alloc]initWithFrame:NSMakeRect(0, 260, 280, 120)];
-        [self.contentView addSubview:self->_region_code];
-        self->_region_name = [[NSLabel alloc]initWithFrame:NSMakeRect(0, 280, 280, 120)];
-        [self.contentView addSubview:self->_region_name];
+        title.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.contentView addConstraint: [NSLayoutConstraint constraintWithItem:title
+                                                                      attribute:NSLayoutAttributeCenterX
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:self.contentView
+                                                                      attribute:NSLayoutAttributeCenterX
+                                                                     multiplier:1.0f
+                                                                       constant:0.0f]];
+//        [self.contentView addConstraint: [NSLayoutConstraint constraintWithItem:title
+//                                                                      attribute:NSLayoutAttributeRight
+//                                                                      relatedBy:NSLayoutRelationEqual
+//                                                                         toItem:self.contentView
+//                                                                      attribute:NSLayoutAttributeRight
+//                                                                     multiplier:1.0f
+//                                                                       constant:0.0f]];
+        [self.contentView addConstraint: [NSLayoutConstraint constraintWithItem:title
+                                                                      attribute:NSLayoutAttributeTop
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:self.contentView
+                                                                      attribute:NSLayoutAttributeTop
+                                                                     multiplier:1.0f
+                                                                       constant:5.0f]];
+        title.text = @"Your network information";
+ 
     }
     return self;
+}
+
+-(void)createComponents {
+    
+    self.textIP = [[NSLabel alloc]initWithFrame:NSMakeRect(0, 100, 200, 40)];
+    [self.contentView addSubview:self.textIP];
+    
+    self->_mapView = [[MKMapView alloc]initWithFrame:NSMakeRect(0, 400, 280, 300)];
+    self->_mapView.rotateEnabled = NO;
+    [self.contentView addSubview:self->_mapView];
+    
+    
+    self->_timeZone = [[NSLabel alloc]initWithFrame:NSMakeRect(0, 160, 280, 120)];
+    [self.contentView addSubview:self->_timeZone];
+    self->_city = [[NSLabel alloc]initWithFrame:NSMakeRect(0, 180, 280, 120)];
+    [self.contentView addSubview:self->_city];
+    self->_zip_code = [[NSLabel alloc]initWithFrame:NSMakeRect(0, 200, 280, 120)];
+    [self.contentView addSubview:self->_zip_code];
+    self->_country_code = [[NSLabel alloc]initWithFrame:NSMakeRect(0, 220, 280, 120)];
+    [self.contentView addSubview:self->_country_code];
+    self->_country_name = [[NSLabel alloc]initWithFrame:NSMakeRect(0, 240, 100, 120)];
+    [self.contentView addSubview:self->_country_name];
+    self->_country_flag = [[NSImageView alloc]initWithFrame:NSMakeRect(100, 240, 100, 100)];
+    [self.contentView addSubview:self->_country_flag];
+    self->_region_code = [[NSLabel alloc]initWithFrame:NSMakeRect(0, 260, 280, 120)];
+    [self.contentView addSubview:self->_region_code];
+    self->_region_name = [[NSLabel alloc]initWithFrame:NSMakeRect(0, 280, 280, 120)];
+    [self.contentView addSubview:self->_region_name];
 }
 
 -(void)setWindowDelegate:(id<NSWindowDelegate>)delegate
@@ -74,7 +109,13 @@
     self.delegate = delegate;
 }
 
--(void)updateData
+-(void)updateData {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self updateDataOnMain];
+    });
+}
+
+-(void)updateDataOnMain
 
 {
 //    [self.tableView reloadData];

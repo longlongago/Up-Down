@@ -51,6 +51,7 @@
 		CED0A9ED1D1E6741007B09B6 /* libtop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libtop.h; sourceTree = "<group>"; };
 		CED0A9EE1D1E68C3007B09B6 /* rb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rb.h; sourceTree = "<group>"; };
 		CED0A9F11D1F0186007B09B6 /* iNetStat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = iNetStat.entitlements; sourceTree = "<group>"; };
+		CEFDC4421DBA81D800ABB0FF /* Define.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +135,7 @@
 				CED0A9E61D087663007B09B6 /* SystemThemeChangeHelper.m */,
 				CED0A9E81D0B2D2E007B09B6 /* MonitorTask.h */,
 				CED0A9E91D0B2D2E007B09B6 /* MonitorTask.m */,
+				CEFDC4421DBA81D800ABB0FF /* Define.h */,
 			);
 			path = iNetStat;
 			sourceTree = "<group>";

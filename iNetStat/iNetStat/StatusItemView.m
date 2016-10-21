@@ -8,6 +8,7 @@
 
 #import "StatusItemView.h"
 #import "SystemThemeChangeHelper.h"
+#import "Define.h"
 
 const static float KB = 1024;
 const static float MB = KB*1024;
@@ -45,7 +46,7 @@ const static float TB = GB*1024;
     [self.statusItem drawStatusBarBackgroundInRect:dirtyRect withHighlight:self.mouseDown];
     self.fontColor = (self.darkModel || self.mouseDown)?[NSColor whiteColor]:[NSColor blackColor];
     
-    NSDictionary* fontAttribute = @{NSFontAttributeName: [NSFont systemFontOfSize:self.fontSize], NSForegroundColorAttributeName:self.fontColor};
+    NSDictionary* fontAttribute = @{NSFontAttributeName: [NSFont fontWithName: FONT_NAME size: self.fontSize ], NSForegroundColorAttributeName:self.fontColor};
     NSAttributedString* upRateString = [[NSAttributedString alloc] initWithString:[self.upRate stringByAppendingString:@" ↑"] attributes: fontAttribute];
     [upRateString drawAtPoint:NSMakePoint(self.bounds.size.width - upRateString.size.width -5, 10)];
     NSAttributedString* downRateString = [[NSAttributedString alloc] initWithString:[self.downRate stringByAppendingString:@" ↓"] attributes:fontAttribute];

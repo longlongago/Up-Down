@@ -31,7 +31,7 @@
     self = [super initWithWindow:panel];
     if (self) {
         self.echoSites = @[@"https://api.ipify.org", @"https://icanhazip.com/", @"https://www.trackip.net/ip"];
-        self.index = 2;
+        self.index = 0;
         self.delegate = delegate;
         self.panel = panel;
         [self.panel setWindowDelegate:self];
@@ -232,7 +232,7 @@
 #pragma mark - PanelDataSource
 -(NSString*) getWanIP
 {
-    return self.wanIP;
+    return self.wanIP==nil?@"":self.wanIP;
 }
 
 -(NSDictionary*) getIPInfo
